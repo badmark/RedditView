@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedditView</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="rv-popup-container">
+    <!-- Header -->
+    <header class="rv-popup-header">
+      <div class="rv-brand">
+        <img src="../icons/icon-48.png" alt="" class="rv-logo">
+        <div class="rv-brand-info">
+          <h1>RedditView</h1>
+          <span class="rv-version">v1.0.0</span>
+        </div>
+      </div>
+      <div class="rv-header-badge">
+        <span class="rv-status-dot online"></span>
+        <span>Active</span>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="rv-nav-tabs">
+      <button type="button" class="rv-nav-tab active" data-tab="active-page">Current Page</button>
+      <button type="button" class="rv-nav-tab" data-tab="user-lookup">User Lookup</button>
+      <button type="button" class="rv-nav-tab" data-tab="thread-lookup">Thread Lookup</button>
+      <button type="button" class="rv-nav-tab" data-tab="settings">Settings</button>
+    </nav>
+
+    <!-- Tab 1: Current Page -->
+    <section class="rv-tab-content active" id="tab-active-page">
+      <div id="page-context-container">
+        <div class="rv-context-card">
+          <div class="rv-context-label">Detected Reddit Page</div>
+          <div class="rv-context-title" id="page-context-title">Scanning active tab...</div>
+        </div>
+
+        <div id="profile-actions" class="rv-actions-group" style="display: none;">
+          <button type="button" class="rv-action-btn primary" id="btn-force-reveal">
+            👁️ Force Reveal Profile History (Ctrl+G)
+          </button>
+          <div class="rv-btn-row">
+            <a href="#" target="_blank" class="rv-sub-btn" id="link-ghostddit">Open in Ghostddit</a>
+            <a href="#" target="_blank" class="rv-sub-btn" id="link-reveddit">Open in Reveddit</a>
+          </div>
+          <div class="rv-btn-row">
+            <a href="#" target="_blank" class="rv-sub-btn" id="link-arctic">Open in Arctic Shift</a>
+            <a href="#" target="_blank" class="rv-sub-btn" id="link-pullpush">Open in Pullpush</a>
+          </div>
+        </div>
+
+        <div id="thread-actions" class="rv-actions-group" style="display: none;">
+          <button type="button" class="rv-action-btn primary" id="btn-scan-thread">
+            🔍 Scan & Reveal All Deleted Comments
+          </button>
+          <div class="rv-btn-row">
+            <a href="#" target="_blank" class="rv-sub-btn" id="link-thread-reveddit">View Thread on Reveddit</a>
+          </div>
+        </div>
+
+        <div id="generic-actions" class="rv-actions-group">
+          <p class="rv-hint-text">
+            Navigate to any Reddit user profile (e.g. <code>reddit.com/user/...</code>) or thread to unhide content and reveal deleted comments.
+          </p>
+          <div class="rv-quick-links">
+            <a href="https://www.reddit.com" target="_blank" class="rv-sub-btn">Go to Reddit</a>
+            <a href="https://ghostddit.aeddit.com" target="_blank" class="rv-sub-btn">Visit Ghostddit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: User Lookup -->
+    <section class="rv-tab-content" id="tab-user-lookup">
+      <form id="form-user-lookup" class="rv-search-form">
+        <div class="rv-input-group">
+          <span class="rv-input-prefix">u/</span>
+          <input type="text" id="input-username" placeholder="Enter username..." required />
+          <button type="submit" class="rv-search-btn">Search</button>
+        </div>
+      </form>
+
+      <div class="rv-archive-mirrors" id="user-mirrors" style="display: none;">
+        <span>Direct Archive Links:</span>
+        <div class="rv-mirror-links">
+          <a href="#" target="_blank" id="user-ghostddit-link">Ghostddit</a>
+          <a href="#" target="_blank" id="user-reveddit-link">Reveddit</a>
+          <a href="#" target="_blank" id="user-arctic-link">Arctic Shift</a>
+        </div>
+      </div>
+
+      <div class="rv-results-container" id="user-results-wrap">
+        <div class="rv-placeholder-text">Enter any username to search their hidden and archived history.</div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Thread Lookup -->
+    <section class="rv-tab-content" id="tab-thread-lookup">
+      <form id="form-thread-lookup" class="rv-search-form">
+        <div class="rv-input-group">
+          <input type="text" id="input-thread-query" placeholder="Paste Reddit URL or comment/post ID..." required />
+          <button type="submit" class="rv-search-btn">Lookup</button>
+        </div>
+      </form>
+
+      <div class="rv-results-container" id="thread-results-wrap">
+        <div class="rv-placeholder-text">Paste a Reddit submission URL or comment ID to reveal deleted text from public archives.</div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Settings -->
+    <section class="rv-tab-content" id="tab-settings">
+      <div class="rv-settings-list">
+        <label class="rv-setting-item">
+          <div class="rv-setting-info">
+            <div class="rv-setting-title">Auto-Reveal Hidden Profiles</div>
+            <div class="rv-setting-desc">Automatically unhide profile feeds when Reddit shows an empty state</div>
+          </div>
+          <input type="checkbox" id="setting-auto-reveal" checked />
+        </label>
+
+        <label class="rv-setting-item">
+          <div class="rv-setting-info">
+            <div class="rv-setting-title">Deleted Content Buttons</div>
+            <div class="rv-setting-desc">Show inline [Reveal] buttons on [deleted] & [removed] comments</div>
+          </div>
+          <input type="checkbox" id="setting-show-deleted" checked />
+        </label>
+
+        <label class="rv-setting-item">
+          <div class="rv-setting-info">
+            <div class="rv-setting-title">Force Reveal Mode (Global)</div>
+            <div class="rv-setting-desc">Always replace profile feeds with RedditView (also toggled via Ctrl+G)</div>
+          </div>
+          <input type="checkbox" id="setting-force-mode" />
+        </label>
+
+        <div class="rv-setting-select-group">
+          <label for="setting-archive-provider" class="rv-setting-title">Preferred Archive Provider</label>
+          <div class="rv-setting-desc">Primary service for fetching deleted comment text</div>
+          <select id="setting-archive-provider" class="rv-select">
+            <option value="auto">Auto-Fallback (Arctic Shift + Pullpush)</option>
+            <option value="arctic">Arctic Shift Only</option>
+            <option value="pullpush">Pullpush Only</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rv-settings-footer">
+        <span class="rv-saved-notice" id="settings-saved-notice" style="display: none;">Settings Saved!</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="rv-popup-footer">
+      <span>RedditView • Public Reddit & Archive Inspector</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

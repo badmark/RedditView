@@ -1,0 +1,17 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Package & build artifacts
+*.crx
+*.zip
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Environment / local configs
+.env
+.env.local
