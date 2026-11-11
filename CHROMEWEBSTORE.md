@@ -85,7 +85,7 @@ RedditView operates entirely on the client side without telemetry, user accounts
 ## Privacy Policy
 
 **Privacy Policy URL** [REQUIRED]
-https://github.com/mark/RedditView/blob/main/PRIVACY.md
+https://github.com/$(USER)/RedditView/blob/main/PRIVACY.md
 
 ## Distribution
 

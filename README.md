@@ -33,12 +33,12 @@ RedditView is a Manifest V3 browser extension that allows you to view Reddit use
 
 1. Clone or download this folder to your machine:
    ```bash
-   /home/mark/Projects/RedditView
+   /home/$(USER)/Projects/RedditView
    ```
 2. Open Chrome (or any Chromium browser) and navigate to `chrome://extensions`.
 3. In the top-right corner, enable **Developer mode** toggle.
 4. Click the **Load unpacked** button in the top-left.
-5. Select this folder (`/home/mark/Projects/RedditView`).
+5. Select this folder (`/home/$(USER)/Projects/RedditView`).
 6. The extension is now loaded and active!
 
 ---
